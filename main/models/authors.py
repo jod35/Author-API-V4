@@ -1,4 +1,4 @@
-from src.utils.database import db
+from main.utils.database import db
 from werkzeug.security import generate_password_hash,check_password_hash
 
 class Author(db.Model):
