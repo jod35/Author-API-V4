@@ -40,7 +40,7 @@ class AuthorSchema(ModelSchema):
         model=Author
         sqla_session=db.session
 
-    id=fields.Integer
-    name=fields.String
-    email=fields.String
-    specialization=fields.String
+    id=fields.Integer()
+    name=fields.String()
+    email=fields.String()
+    specialization=fields.String()

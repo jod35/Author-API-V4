@@ -21,7 +21,20 @@ def hello():
 #get all authors
 @api_blueprint.route('/authors',methods=['GET'])
 def get_all_authors():
-    pass
+    all_authors=Author.query.all()
+
+    author_schema=AuthorSchema(many=True)
+
+    authors=author_schema.dump(all_authors)
+
+    message="authors"
+
+    return make_response(
+        jsonify({
+            "message":message,
+            "authors":authors
+        })
+    )
 
 #get an author with an ID
 @api_blueprint.route('/author/<id>',methods=['GET'])
