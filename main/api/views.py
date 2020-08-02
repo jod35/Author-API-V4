@@ -38,8 +38,17 @@ def get_all_authors():
 
 #get an author with an ID
 @api_blueprint.route('/author/<id>',methods=['GET'])
-def get_single_author():
-    pass
+def get_single_author(id):
+    single_author=Author.query.get_or_404(id)
+
+    author=AuthorSchema().dump(single_author)
+
+    return make_response(
+        jsonify({
+            "Success":True,
+            "Author":author
+        })
+    )
    
 
 #create an new author
