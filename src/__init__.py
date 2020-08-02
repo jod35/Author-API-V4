@@ -1,7 +1,7 @@
 from flask import Flask
 from .config import DevConfig
 from src.utils.database import db
-
+from src.models.authors import Author
 
 app=Flask(__name__)
 
@@ -14,7 +14,8 @@ db.init_app(app)
 def make_shell_context():
     return {
         'app':app,
-        'db':db
+        'db':db,
+        'author_model':Author
     }
 
 

@@ -8,6 +8,5 @@ class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS=False
 
 class DevConfig(Config):
-    SQLALCHEMY_DATABASE_URI='mysql+pymysql://{}:{}@localhost/author_db'
+    SQLALCHEMY_DATABASE_URI='mysql+pymysql://{}:{}@localhost/author_db'.format(db_user,db_password)
     DEBUG=True
-    
