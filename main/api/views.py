@@ -47,7 +47,7 @@ def get_single_author(id):
         jsonify({
             "Success":True,
             "Author":author
-        })
+        }),200
     )
    
 
