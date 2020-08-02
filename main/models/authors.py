@@ -1,5 +1,7 @@
 from main.utils.database import db
 from werkzeug.security import generate_password_hash,check_password_hash
+from marshmallow_sqlalchemy import ModelSchema
+from marshmallow import fields
 
 class Author(db.Model):
     id=db.Column(db.Integer,primary_key=True)
@@ -27,3 +29,18 @@ class Author(db.Model):
     def check_password(self,password):
         return check_password_hash(self.passwd_hash,password)
 
+
+
+##################################
+##### OUTPUT SCHEMA ##############
+##################################
+
+class AuthorSchema(ModelSchema):
+    class Meta(ModelSchema.Meta):
+        model=Author
+        sqla_session=db.session
+
+    id=fields.Integer
+    name=fields.String
+    email=field.String
+    specialization=fields.String
