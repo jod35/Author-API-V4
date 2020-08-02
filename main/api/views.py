@@ -33,18 +33,44 @@ def get_all_authors():
         jsonify({
             "message":message,
             "authors":authors
-        })
+        }),200
     )
 
 #get an author with an ID
 @api_blueprint.route('/author/<id>',methods=['GET'])
 def get_single_author():
     pass
+   
 
 #create an new author
 @api_blueprint.route('/authors',methods=['POST'])
 def create_new_author():
-    pass
+    data=request.get_json() #getting data in JSON format
+
+    new_author=Author(
+        name=data['name'],
+        email=data['email'],
+        specialization=data['specialization']
+    )
+    
+    password=data['password']
+
+    new_author.hash_password(password)
+
+    new_author.create() #save the new author to db
+
+    author=AuthorSchema().dump(new_author)
+
+    return make_response(
+        jsonify(
+            {
+                "success":True,
+                "message":"Author created successfully",
+                "author":author
+            }
+        ),201
+    )
+
 
 #update author info
 @api_blueprint.route('/author/<id>',methods=['PUT'])
