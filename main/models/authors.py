@@ -42,5 +42,5 @@ class AuthorSchema(ModelSchema):
 
     id=fields.Integer
     name=fields.String
-    email=field.String
+    email=fields.String
     specialization=fields.String
