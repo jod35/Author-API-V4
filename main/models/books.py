@@ -27,12 +27,16 @@ class Book(db.Model):
 
 class BookSchema(ModelSchema):
     class Meta(ModelSchema.Meta):
-        id=fields.Integer()
-        title=fields.String()
-        pages=fields.Integer()
-        publish_year=fields.String()
-        description=fields.String()
-        
+        model=Book
+        sqla_session=db.session
+
+
+    id=fields.Integer()
+    title=fields.String(required=True)
+    pages=fields.Integer(required=True)
+    publish_year=fields.String(required=True)
+    description=fields.String(required=True)
+
 
 
 
