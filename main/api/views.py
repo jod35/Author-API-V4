@@ -209,7 +209,7 @@ def update_book(id):
         jsonify(
             {"message":"Book updated successfully",
              "book":book,
-             "Success",True
+             "Success":True
              }
         ),200
     )
@@ -243,4 +243,19 @@ def edit_book_details(id):
 #delete book
 @api_blueprint.route('/book/<id>',methods=['DELETE'])
 def delete_book(id):
-    pass
+    book_to_delete=Book.query.get_or_404(id)
+
+    book_to_delete.delete()
+
+    book=BookSchema().dump(book_to_delete)
+
+    return make_response(
+        jsonify(
+            {
+                "message":"Book Deleted successfully",
+                "Success":True,
+                "book deleted":book
+            }
+        ),200
+
+    )
