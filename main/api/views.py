@@ -2,7 +2,7 @@ from main.models.authors import Author
 from main.utils.database import db
 from flask import request,jsonify,make_response,Blueprint
 from main.models.authors import Author,AuthorSchema
-
+from main.models.books import Book,BookSchema
 
 api_blueprint=Blueprint('api_bp',__name__)
 
@@ -132,7 +132,19 @@ def delete_author(id):
 #get all books
 @api_blueprint.route('/books',methods=['GET'])
 def get_all_books():
-    pass
+    get_all_books=Book.query.all()
+
+    books=AuthorSchema(many=True).dump(get_all_books)
+
+    return make_response(
+        jsonify({
+          "Success":True,
+          "books":books  
+        })
+    )
+
+
+
 
 #create a book
 @api_blueprint.route('/books',methods=['POST'])

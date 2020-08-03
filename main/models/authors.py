@@ -2,7 +2,7 @@ from main.utils.database import db
 from werkzeug.security import generate_password_hash,check_password_hash
 from marshmallow_sqlalchemy import ModelSchema
 from marshmallow import fields
-from main.models.books import Book
+
 
 class Author(db.Model):
     id=db.Column(db.Integer,primary_key=True)
@@ -10,6 +10,9 @@ class Author(db.Model):
     email=db.Column(db.String(255),unique=True)
     specialization=db.Column(db.String(255))
     passwd_hash=db.Column(db.Text)
+
+    from main.models.books import Book
+
     books=db.relationship('Book',backref='author',lazy=True)
 
     def __repr__(self):
