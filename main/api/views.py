@@ -103,11 +103,24 @@ def update_author_info(id):
         jsonify({
             "message":"Author's Info Updated Successfully",
             "author":author
-        })
+        }),200
     )
 
 
 #delete author
-@api_blueprint.route('/author/<id>')
-def delete_author():
-    pass
+@api_blueprint.route('/author/<id>',methods=['DELETE'])
+def delete_author(id):
+    author_to_delete=Author.query.get_or_404(id)
+
+    author_to_delete.delete()
+
+    author=AuthorSchema().dump(author_to_delete)
+
+    return make_response(jsonify({
+        "message":"Author deleted successfully",
+        "Success":True,
+        "author":author
+    }),200
+    )
+
+    
