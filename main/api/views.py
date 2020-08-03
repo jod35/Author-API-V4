@@ -124,3 +124,37 @@ def delete_author(id):
     )
 
     
+##############################
+########BOOK VIEWS ###########
+##############################
+
+
+#get all books
+@api_blueprint.route('/books',methods=['GET'])
+def get_all_books():
+    pass
+
+#create a book
+@api_blueprint.route('/books',methods=['POST'])
+def create_book():
+    pass
+
+#get book by an id
+@api_blueprint.route('/book/<id>',methods=['GET'])
+def get_single_book(id):
+    pass
+
+#update book
+@api_blueprint.route('/book/<id>',methods=['PUT'])
+def update_book(id):
+    pass
+
+#edit book details
+@api_blueprint.route('/book/<id>',methods=['PATCH'])
+def edit_book_details(id):
+    pass
+
+#delete book
+@api_blueprint.route('/book/<id>',methods=['DELETE'])
+def delete_book(id):
+    pass

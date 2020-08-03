@@ -25,4 +25,14 @@ class Book(db.Model):
         db.session.commit()
 
 
+class BookSchema(ModelSchema):
+    class Meta(ModelSchema.Meta):
+        id=fields.Integer()
+        title=fields.String()
+        pages=fields.Integer()
+        publish_year=fields.String()
+        description=fields.String()
+        
+
+
 
