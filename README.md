@@ -6,7 +6,7 @@ This is the improved and last version of the CRUD AuthorApi I created a while ag
 | ROUTE | METHOD  | DESCRIPTION |
 |-------|---------|-------------|
 | /authors/ | GET    | Get all authors alongside their books |
-| /author/id | GET   | Get an author with an id alongside the books written by the author|
+| /author/id | GET   | Get an author with an id|
 | /authors/ | POST  | create a new author |
 | /author/id | PUT   | Update info for an author with an id |
 | /author/id | DELETE | Delete an author with an id |  
@@ -14,6 +14,7 @@ This is the improved and last version of the CRUD AuthorApi I created a while ag
 | /book/id   | GET   | Get a book with an id |
 | /books/    | POST  | Create a new book | 
 | /book/id   | PUT  | Update a book with a given id |
+| /book/id   | PATCH  | Edit a book's description    |
 | /book/id   | DELETE | Delete a book with a given id |
 
 

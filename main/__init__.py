@@ -45,6 +45,8 @@ def method_not_allowed(err):
 
 from main.models.authors import Author
 from main.models.books import Book
+
+from main.models.users import User
 @app.shell_context_processor
 def make_shell_context():
     return {
