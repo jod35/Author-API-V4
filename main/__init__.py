@@ -30,6 +30,15 @@ def internal_server_err(err):
         ),500
     )
 
+@app.errorhandler(405)
+def method_not_allowed(err):
+    return make_response(
+        jsonify(
+            {"message":"The method is not allowed for this endpoint."}
+        )
+    )
+
+
 
 from main.models.authors import Author
 @app.shell_context_processor
