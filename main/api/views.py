@@ -134,7 +134,7 @@ from main.models.books import Book,BookSchema
 def get_all_books():
     get_all_books=Book.query.all()
 
-    books=AuthorSchema(many=True).dump(get_all_books)
+    books=BookSchema(many=True).dump(get_all_books)
 
     return make_response(
         jsonify({
@@ -160,7 +160,7 @@ def create_book():
 
     new_book.create()
 
-    book=AuthorSchema().dump(new_book)
+    book=BookSchema().dump(new_book)
 
     return make_response(
         jsonify({
@@ -173,7 +173,17 @@ def create_book():
 #get book by an id
 @api_blueprint.route('/book/<id>',methods=['GET'])
 def get_single_book(id):
-    pass
+    get_book=Book.query.get_or_404(id)
+
+    book=BookSchema().dump(get_book)
+
+    return make_response(
+        jsonify({"Success":True,
+                 "book":book
+        }),200
+    )
+
+
 
 #update book
 @api_blueprint.route('/book/<id>',methods=['PUT'])
