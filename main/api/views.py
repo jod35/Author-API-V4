@@ -83,8 +83,29 @@ def create_new_author():
 
 #update author info
 @api_blueprint.route('/author/<id>',methods=['PUT'])
-def update_author_info():
-    pass
+def update_author_info(id):
+    data=request.get_json()
+
+    author_to_update=Author.query.get_or_404(id)
+    
+    if data['name']:
+        author_to_update.name=data['name']
+
+    if data['specialization']:
+        author_to_update.specialization=data['specialization']
+
+    db.session.add(author_to_update)
+    db.session.commit()
+
+    author=AuthorSchema().dump(author_to_update)
+
+    return make_response(
+        jsonify({
+            "message":"Author's Info Updated Successfully",
+            "author":author
+        })
+    )
+
 
 #delete author
 @api_blueprint.route('/author/<id>')
