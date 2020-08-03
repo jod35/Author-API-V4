@@ -11,7 +11,7 @@ class Book(db.Model):
     pages=db.Column(db.Integer,nullable=False)
     publish_year=db.Column(db.String(4),nullable=False)
     description=db.Column(db.Text())
-    user_id=db.Column(db.Integer(),db.ForeignKey('author.id'))
+    author_id=db.Column(db.Integer(),db.ForeignKey('author.id'))
 
     def __repr__(self):
         return f'Book <{self.title}>'
@@ -24,5 +24,5 @@ class Book(db.Model):
         db.session.add(self)
         db.session.commit()
 
-        
+
 
