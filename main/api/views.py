@@ -188,12 +188,57 @@ def get_single_book(id):
 #update book
 @api_blueprint.route('/book/<id>',methods=['PUT'])
 def update_book(id):
-    pass
+    book_to_update=Book.query.get_or_404(id)
 
-#edit book details
+    data=request.get_json()
+
+    if data['title']:
+        book_to_update.title=data['title']
+
+    if data['description']:
+        book_to_update.description=data['description']
+
+
+    db.session.add(book_to_update)
+    db.session.commit()
+
+
+    book=BookSchema().dump(book_to_update)
+
+    return make_response(
+        jsonify(
+            {"message":"Book updated successfully",
+             "book":book,
+             "Success",True
+             }
+        ),200
+    )
+
+#edit book details (description)
 @api_blueprint.route('/book/<id>',methods=['PATCH'])
 def edit_book_details(id):
-    pass
+    book_to_edit=Book.query.get_or_404(id)
+
+    data=request.get_json()
+
+    if data['description']:
+        book_to_edit.description=data['description']
+
+    db.session.add(book_to_edit)
+    db.session.commit()
+    
+    book=BookSchema().dump(book_to_edit)
+
+    return make_response(
+        jsonify(
+            {
+                "message":"Book description updated successfully",
+                "book":book,
+                "Success":True
+            }
+        ),200
+    )
+
 
 #delete book
 @api_blueprint.route('/book/<id>',methods=['DELETE'])
