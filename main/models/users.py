@@ -1,5 +1,7 @@
 from main.utils.database import db
 from werkzeug.security import generate_password_hash,check_password_hash
+from marshmallow_sqlalchemy import ModelSchema
+from marshmallow import fields
 
 class User(db.Model):
     id=db.Column(db.Integer,primary_key=True)
@@ -24,3 +26,18 @@ class User(db.Model):
     def check_password(self,password):
         return check_password_hash(self.passwd_hash,password)
 
+from main.utils.logins import login_manager
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+
+
+class UserSchema(ModelSchema):
+    class Meta(ModelSchema.Meta):
+        model=User
+        sqla_session=db.session
+
+    id=fields.Integer(dump_only=True)
+    username=fields.String(required=True)
+    email=fields.String(required=True)
+    

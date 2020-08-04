@@ -3,6 +3,7 @@ from .config import DevConfig
 from main.utils.database import db
 from flask import jsonify,make_response
 from flask_migrate import Migrate
+from flask_jwt_extended import JWTManager
 
 
 
@@ -12,9 +13,14 @@ app.config.from_object(DevConfig)
 db.init_app(app)
 
 migrate=Migrate(app,db)
-
+login_manager.init_app(app)
+JWTManager(app)
 from main.api.views import api_blueprint
+from main.auth.views import auth_blueprint
+
+
 app.register_blueprint(api_blueprint,url_prefix='/api')
+app.register_blueprint(auth_blueprint,url_prefix='/auth')
 
 
 @app.errorhandler(404)
