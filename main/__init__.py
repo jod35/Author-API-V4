@@ -47,7 +47,13 @@ def method_not_allowed(err):
         )
     )
 
-
+@app.errorhandler(401)
+def unauthorized(err):
+    return make_response(
+        jsonify(
+            {"message":"You are not allowed to access this endpoint."}
+        )
+    )
 
 from main.models.authors import Author
 from main.models.books import Book

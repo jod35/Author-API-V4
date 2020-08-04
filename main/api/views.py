@@ -2,6 +2,7 @@ from main.models.authors import Author
 from main.utils.database import db
 from flask import request,jsonify,make_response,Blueprint
 from main.models.authors import Author,AuthorSchema
+from flask_jwt_extended import jwt_required
 
 
 api_blueprint=Blueprint('api_bp',__name__)
@@ -20,6 +21,7 @@ def hello():
 
 #get all authors
 @api_blueprint.route('/authors',methods=['GET'])
+@jwt_required
 def get_all_authors():
     all_authors=Author.query.all()
 
@@ -38,6 +40,7 @@ def get_all_authors():
 
 #get an author with an ID
 @api_blueprint.route('/author/<id>',methods=['GET'])
+@jwt_required
 def get_single_author(id):
     single_author=Author.query.get_or_404(id)
 
@@ -53,6 +56,7 @@ def get_single_author(id):
 
 #create an new author
 @api_blueprint.route('/authors',methods=['POST'])
+@jwt_required
 def create_new_author():
     data=request.get_json() #getting data in JSON format
 
@@ -83,6 +87,7 @@ def create_new_author():
 
 #update author info
 @api_blueprint.route('/author/<id>',methods=['PUT'])
+@jwt_required
 def update_author_info(id):
     data=request.get_json()
 
@@ -109,6 +114,7 @@ def update_author_info(id):
 
 #delete author
 @api_blueprint.route('/author/<id>',methods=['DELETE'])
+@jwt_required
 def delete_author(id):
     author_to_delete=Author.query.get_or_404(id)
 
@@ -131,6 +137,7 @@ from main.models.books import Book,BookSchema
 
 #get all books
 @api_blueprint.route('/books',methods=['GET'])
+@jwt_required
 def get_all_books():
     get_all_books=Book.query.all()
 
@@ -148,6 +155,7 @@ def get_all_books():
 
 #create a book
 @api_blueprint.route('/books',methods=['POST'])
+@jwt_required
 def create_book():
     data=request.get_json()
 
@@ -172,6 +180,7 @@ def create_book():
 
 #get book by an id
 @api_blueprint.route('/book/<id>',methods=['GET'])
+@jwt_required
 def get_single_book(id):
     get_book=Book.query.get_or_404(id)
 
@@ -187,6 +196,7 @@ def get_single_book(id):
 
 #update book
 @api_blueprint.route('/book/<id>',methods=['PUT'])
+@jwt_required
 def update_book(id):
     book_to_update=Book.query.get_or_404(id)
 
@@ -216,6 +226,7 @@ def update_book(id):
 
 #edit book details (description)
 @api_blueprint.route('/book/<id>',methods=['PATCH'])
+@jwt_required
 def edit_book_details(id):
     book_to_edit=Book.query.get_or_404(id)
 
@@ -242,6 +253,7 @@ def edit_book_details(id):
 
 #delete book
 @api_blueprint.route('/book/<id>',methods=['DELETE'])
+@jwt_required
 def delete_book(id):
     book_to_delete=Book.query.get_or_404(id)
 
