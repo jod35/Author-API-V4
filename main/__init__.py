@@ -13,8 +13,8 @@ app.config.from_object(DevConfig)
 db.init_app(app)
 
 migrate=Migrate(app,db)
-login_manager.init_app(app)
-JWTManager(app)
+
+jwt=JWTManager(app)
 from main.api.views import api_blueprint
 from main.auth.views import auth_blueprint
 

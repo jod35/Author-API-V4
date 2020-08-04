@@ -34,3 +34,37 @@ def create_account():
     )
 
 
+#login user
+@auth_blueprint.route('/login',methods=['POST'])
+def login():
+    data=request.get_json()
+
+    username=data['username']
+    password=data['password']
+
+    user=User.query.filter_by(username=username).first()
+
+    if not user:
+        return make_response(
+            jsonify({
+                "message":"No such user exists"
+            }),404
+        )
+
+    if user and user.check_password(password):
+        access_token=create_access_token(identity=data['username'])
+
+        message="Logged In as {}".format(data['username'])
+
+        return make_response(
+            jsonify(
+                {"message":message,
+                 "Success":True,
+                 "access_token":access_token}
+            )
+        )
+
+
+
+
+
