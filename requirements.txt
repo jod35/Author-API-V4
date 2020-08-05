@@ -1,0 +1,7 @@
+flask
+flask_sqlalchemy
+flask_jwt_extended
+flask_marshamallow
+marshamallow_sqlalchemy
+pymysql
+flask_migrate

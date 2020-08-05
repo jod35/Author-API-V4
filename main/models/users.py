@@ -3,22 +3,14 @@ from werkzeug.security import generate_password_hash,check_password_hash
 from marshmallow_sqlalchemy import ModelSchema
 from marshmallow import fields
 
-
-class Author(db.Model):
+class User(db.Model):
     id=db.Column(db.Integer,primary_key=True)
-    name=db.Column(db.String(255),nullable=False)
-    email=db.Column(db.String(255),unique=True)
-    specialization=db.Column(db.String(255))
+    username=db.Column(db.String(25),unique=True)
+    email=db.Column(db.String(80),unique=True)
     passwd_hash=db.Column(db.Text)
 
-    from main.models.books import Book
-
-    books=db.relationship('Book',backref='author',lazy=True)
-
     def __repr__(self):
-        return f'Author <{self.name}>'
-
-    #creating an author
+        return f'User <{self.username}>'
 
     def create(self):
         db.session.add(self)
@@ -34,18 +26,18 @@ class Author(db.Model):
     def check_password(self,password):
         return check_password_hash(self.passwd_hash,password)
 
+from main.utils.logins import login_manager
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
 
 
-##################################
-##### OUTPUT SCHEMA ##############
-##################################
-
-class AuthorSchema(ModelSchema):
+class UserSchema(ModelSchema):
     class Meta(ModelSchema.Meta):
-        model=Author
+        model=User
         sqla_session=db.session
 
-    id=fields.Integer()
-    name=fields.String()
-    email=fields.String()
-    specialization=fields.String()
+    id=fields.Integer(dump_only=True)
+    username=fields.String(required=True)
+    email=fields.String(required=True)
+    
