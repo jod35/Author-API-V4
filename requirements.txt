@@ -1,7 +1,8 @@
 flask
 flask_sqlalchemy
 flask_jwt_extended
-flask_marshamallow
-marshamallow_sqlalchemy
+flask_marshmallow
+marshmallow_sqlalchemy
 pymysql
 flask_migrate
+python-decouple
