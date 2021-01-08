@@ -1,7 +1,8 @@
 import os
+from decouple import config
 
-db_user=os.environ.get('MYSQL_USER') or 'jona'
-db_password=os.environ.get('MYSQL_PASSWORD') or 'nathanoj35'
+db_user=config('DB_USER')
+db_password=config('DB_PASSWORD')
 
 class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'c495ddff1e5a1284a317cf053d3b8cf0245c01090c4b0e6c279373ffad1ed631'
