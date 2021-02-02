@@ -6,3 +6,4 @@ marshmallow_sqlalchemy
 pymysql
 flask_migrate
 python-decouple
+gunicorn
