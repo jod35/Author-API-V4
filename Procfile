@@ -1,1 +1,1 @@
-gunicorn web "run:create_app()" --log-file -
+web gunicorn "run:create_app()" --log-file -
