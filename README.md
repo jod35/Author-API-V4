@@ -1,7 +1,16 @@
 # Author API V4
 This is the improved and last version of the CRUD AuthorApi I created a while ago. I summarises most concepts I learned while building the recent versions. It includes JWT Authentication.
 
-## The Endpoints
+
+### Users And Routes
+To access book and author resources, You need to add the prefix ` /api ` to the root URL
+For example, ` GET http://authoapiv4.herokuapp.com/api/authors ` to get a list of users
+
+### Get authorization to access resources
+To access the API, you will require to get an API Key.
+Visit `https://authoapiv4.herokuapp.com/auth/signup ` to create an account
+Once created visit `https://authoapiv4.herokuapp.com/auth/login` to get an access token
+
 
 | ROUTE | METHOD  | DESCRIPTION |
 |-------|---------|-------------|
