@@ -1,5 +1,5 @@
 from flask import Flask
-from .config import DevConfig
+from .config import DevConfig,ProdConfig
 from main.utils.database import db
 from flask import jsonify,make_response
 from flask_migrate import Migrate
@@ -10,7 +10,7 @@ def create_app():
     
     app=Flask(__name__)
 
-    app.config.from_object(DevConfig)
+    app.config.from_object(ProdConfig)
     db.init_app(app)
 
     migrate=Migrate(app,db)
